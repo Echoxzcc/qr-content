@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫码内容</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        // 自动解码内容
+        const params = new URLSearchParams(window.location.search);
+        const encodedData = params.get('data') || '';
+        
+        try {
+            // 双重解码
+            const decodedData = decodeURIComponent(
+                decodeURIComponent(encodedData)
+            );
+            document.getElementById('content').innerText = decodedData;
+        } catch (e) {
+            document.getElementById('content').innerHTML = 
+                '<p style="color:red">内容解码错误</p>';
+        }
+    </script>
+</body>
+</html>
